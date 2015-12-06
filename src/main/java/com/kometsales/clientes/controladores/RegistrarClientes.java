@@ -40,20 +40,23 @@ public class RegistrarClientes extends HttpServlet {
         String cedula = request.getParameter("cedula");
         String nombre = request.getParameter("nombre");
         Cliente entidad = new Cliente();
-        entidad.setCedula(Long.parseLong(cedula));
-        entidad.setNombre(nombre);
-        IClienteServicio clienteServicio = new ClienteServicioImplementacion();
-        RequestDispatcher rd=request.getRequestDispatcher("mensaje.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("mensaje.jsp");
         try {
+            entidad.setCedula(Long.parseLong(cedula));
+            entidad.setNombre(nombre);
+            IClienteServicio clienteServicio = new ClienteServicioImplementacion();
             clienteServicio.registrar(entidad);
             request.setAttribute("entidad", entidad);
-            request.setAttribute("tipoMsn","Exito");
+            request.setAttribute("tipoMsn", "Exito");
             request.setAttribute("msn", "Registro Exitoso");
         } catch (SQLException ex) {
             request.setAttribute("entidad", entidad);
-            request.setAttribute("tipoMsn","Error");
-            request.setAttribute("msn", "Registro Fallido-->"+ex.getMessage());
+            request.setAttribute("tipoMsn", "Error");
+            request.setAttribute("msn", "Registro Fallido-->" + ex.getMessage());
             System.out.println("EXCEPTION AL MOMENTO DE REGISTRAR UN CLIENTE-->" + ex.getMessage());
+        }catch (NumberFormatException ex) {
+            request.setAttribute("tipoMsn", "Error");
+            request.setAttribute("msn", "La Identificación Digitada No es Valida-->" + ex.getMessage());
         }
         rd.forward(request, response);
     }

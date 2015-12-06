@@ -37,27 +37,30 @@ public class ModificarCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String id= request.getParameter("id");
+        String id = request.getParameter("id");
         String cedula = request.getParameter("cedula");
         String nombre = request.getParameter("nombre");
         Cliente entidad = new Cliente();
-        entidad.setCedula(Long.parseLong(cedula));
-        entidad.setNombre(nombre);
-        entidad.setId(Long.parseLong(id));
-        IClienteServicio clienteServicio = new ClienteServicioImplementacion();
-        String paginaSiguiente="mensaje.jsp";
+        String paginaSiguiente = "mensaje.jsp";
         try {
+            entidad.setCedula(Long.parseLong(cedula));
+            entidad.setNombre(nombre);
+            entidad.setId(Long.parseLong(id));
+            IClienteServicio clienteServicio = new ClienteServicioImplementacion();
             clienteServicio.modificar(entidad);
             request.setAttribute("entidad", entidad);
-            request.setAttribute("tipoMsn","Exito");
+            request.setAttribute("tipoMsn", "Exito");
             request.setAttribute("msn", "Modificacion Exitosa");
         } catch (SQLException ex) {
             request.setAttribute("entidad", entidad);
-            request.setAttribute("tipoMsn","Error");
-            request.setAttribute("msn", "Modificación Fallida-->"+ex.getMessage());
+            request.setAttribute("tipoMsn", "Error");
+            request.setAttribute("msn", "Modificación Fallida-->" + ex.getMessage());
             System.out.println("EXCEPTION AL MOMENTO DE MODIFICAR UN CLIENTE-->" + ex.getMessage());
+        } catch (NumberFormatException ex) {
+            request.setAttribute("tipoMsn", "Error");
+            request.setAttribute("msn", "La Identificación Digitada No es Valida-->" + ex.getMessage());
         }
-        RequestDispatcher rd=request.getRequestDispatcher(paginaSiguiente);
+        RequestDispatcher rd = request.getRequestDispatcher(paginaSiguiente);
         rd.forward(request, response);
     }
 

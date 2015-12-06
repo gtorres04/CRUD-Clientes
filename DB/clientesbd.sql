@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost:8889
--- Tiempo de generación: 05-12-2015 a las 21:00:43
+-- Tiempo de generación: 06-12-2015 a las 01:53:10
 -- Versión del servidor: 5.5.42
 -- Versión de PHP: 5.6.10
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `clientesbd`
 --
-CREATE DATABASE IF NOT EXISTS `clientesbd` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `clientesbd`;
 
 -- --------------------------------------------------------
 
@@ -28,12 +26,19 @@ USE `clientesbd`;
 -- Estructura de tabla para la tabla `clientes`
 --
 
-DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE IF NOT EXISTS `clientes` (
   `id` int(11) NOT NULL,
-  `cedula` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `cedula` int(20) NOT NULL,
+  `nombre` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `cedula`, `nombre`) VALUES
+(15, 1234, '12341234'),
+(16, 234523, '2342345');
 
 --
 -- Índices para tablas volcadas
@@ -54,7 +59,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
