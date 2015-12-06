@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
-                            <input maxlength="100" type="text" class="form-control" id="nombre" 
+                            <input name="name" maxlength="100" type="text" class="form-control" id="nombre" 
                                    placeholder="Digite su Nombre" value="<%=cliente.getNombre()%>">
                         </div>
                         <button type="submit" class="btn btn-default">Guardar Cambios</button>
